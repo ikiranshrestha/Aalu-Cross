@@ -29,34 +29,36 @@ public class MainActivity extends AppCompatActivity {
         int tappedImage = Integer.parseInt(img.getTag().toString());
 
         if (gameState[tappedImage] == 2) {
-            gameState[tappedImage] = activePlayer;
-            img.setTranslationY(-1000f);
-            if (activePlayer == 0) {
-                img.setImageResource(R.drawable.x);
-                activePlayer = 1;
-                TextView status = findViewById(R.id.tvStatusBar);
-                status.setText("Aalu's Turn - Tap to play");
-            } else {
-                img.setImageResource(R.drawable.aalu);
-                activePlayer = 0;
-                TextView tvstatusBar = findViewById(R.id.tvStatusBar);
-                tvstatusBar.setText("X's Turn - Tap to play");
+            if (gameActive) {
+                gameState[tappedImage] = activePlayer;
+                img.setTranslationY(-1000f);
+                if (activePlayer == 0) {
+                    img.setImageResource(R.drawable.x);
+                    activePlayer = 1;
+                    TextView status = findViewById(R.id.tvStatusBar);
+                    status.setText("Aalu's Turn - Tap to play");
+                } else {
+                    img.setImageResource(R.drawable.aalu);
+                    activePlayer = 0;
+                    TextView tvstatusBar = findViewById(R.id.tvStatusBar);
+                    tvstatusBar.setText("X's Turn - Tap to play");
+                }
+                img.animate().translationYBy(1000f).setDuration(300);
             }
-            img.animate().translationYBy(1000f).setDuration(300);
-        }
-        for(int[] winPosition: winPositions){
-            if(gameState[winPosition[0]] == gameState[winPosition[1]]
-                    && gameState[winPosition[1]] == gameState[winPosition[2]]
-                    && gameState[winPosition[0]] != 2){
-                String winnerStr;
-                if(gameState[winPosition[0]] == 0){
-                    winnerStr = "X has won";
+            for (int[] winPosition : winPositions) {
+                if (gameState[winPosition[0]] == gameState[winPosition[1]]
+                        && gameState[winPosition[1]] == gameState[winPosition[2]]
+                        && gameState[winPosition[0]] != 2) {
+                    gameActive = false;
+                    String winnerStr;
+                    if (gameState[winPosition[0]] == 0) {
+                        winnerStr = "X has won";
+                    } else {
+                        winnerStr = "Aalu has won";
+                    }
+                    TextView tvstatusBar = findViewById(R.id.tvStatusBar);
+                    tvstatusBar.setText(winnerStr);
                 }
-                else{
-                    winnerStr = "Aalu has won";
-                }
-                TextView tvstatusBar = findViewById(R.id.tvStatusBar);
-                tvstatusBar.setText(winnerStr);
             }
         }
     }
