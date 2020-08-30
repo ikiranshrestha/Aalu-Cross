@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Aalu Cross</string>
+    <string name="game_title">Aalu Cross Khel</string>
+    <string name="main_grid">main Grid</string>
+    <string name="statusbar">X\'s Turn - Tap to Play</string>
+    <string name="reset_game_button">Reset Game</string>
+</resources>
